@@ -1,0 +1,384 @@
+% ****** Start of file apssamp.tex ******
+%
+%   This file is part of the APS files in the REVTeX 4.1 distribution.
+%   Version 4.1r of REVTeX, August 2010
+%
+%   Copyright (c) 2009, 2010 The American Physical Society.
+%
+%   See the REVTeX 4 README file for restrictions and more information.
+%
+% TeX'ing this file requires that you have AMS-LaTeX 2.0 installed
+% as well as the rest of the prerequisites for REVTeX 4.1
+%
+% See the REVTeX 4 README file
+% It also requires running BibTeX. The commands are as follows:
+%
+%  1)  latex apssamp.tex
+%  2)  bibtex apssamp
+%  3)  latex apssamp.tex
+%  4)  latex apssamp.tex
+%
+\documentclass[%
+ reprint,
+%superscriptaddress,
+%groupedaddress,
+%unsortedaddress,
+%runinaddress,
+%frontmatterverbose, 
+%preprint,
+%showpacs,preprintnumbers,
+%nofootinbib,
+%nobibnotes,
+%bibnotes,
+ amsmath,amssymb,
+ aps,
+%pra,
+%prb,
+%rmp,
+%prstab,
+%prstper,
+%floatfix,
+]{revtex4-1}
+\usepackage{amsmath}%
+\usepackage{MnSymbol}%
+\usepackage{wasysym}%
+\usepackage{verbatim}
+\usepackage{graphicx}% Include figure files
+\usepackage{dcolumn}% Align table columns on decimal point
+\usepackage{bm}% bold math
+%\usepackage{hyperref}% add hypertext capabilities
+%\usepackage[mathlines]{lineno}% Enable numbering of text and display math
+%\linenumbers\relax % Commence numbering lines
+
+%\usepackage[showframe,%Uncomment any one of the following lines to test 
+%%scale=0.7, marginratio={1:1, 2:3}, ignoreall,% default settings
+%%text={7in,10in},centering,
+%%margin=1.5in,
+%%total={6.5in,8.75in}, top=1.2in, left=0.9in, includefoot,
+%%height=10in,a5paper,hmargin={3cm,0.8in},
+%]{geometry}
+\newtheorem{mydef1}{Theorem}
+
+\newtheorem{mydef2}{Lemma}
+
+\newtheorem{mydef3}{Resource Inequality}
+
+\newtheorem{mydef4}{Observation}
+
+\mathchardef\mhyphen="2D
+
+\begin{document}
+
+\preprint{APS/123-QED}
+
+\title{Random access codes and non-local resources }% Force line breaks with \\
+
+\author{Anubhav Chaturvedi}
+\email{anubhav.chaturvedi@research.iiit.ac.in}
+\affiliation{Institute of  Theoretical Physics and Astrophysics, National Quantum
+Information Centre, Faculty of Mathematics, Physics and Informatics, University of Gda\'nsk, Wita Stwosza 57, 80-308 Gda\'nsk, Poland}
+\author{Karol Horodecki}
+\affiliation{Institute of  Informatics, National Quantum
+Information Centre, Faculty of Mathematics, Physics and Informatics, University of Gda\'nsk, Wita Stwosza 57, 80-308 Gda\'nsk, Poland}
+\author{Marcin Pawlowski}
+\affiliation{Institute of  Theoretical Physics and Astrophysics, National Quantum
+Information Centre, Faculty of Mathematics, Physics and Informatics, University of Gda\'nsk, Wita Stwosza 57, 80-308 Gda\'nsk, Poland}
+
+\date{\today}% It is always \today, today,
+             %  but any date may be explicitly specified
+
+\begin{abstract}
+This work deals with the notion of inter-convertibility between cryptographic primitives, Random Access Codes (RACs) and static non-local resources. We introduce a couple of new classes of non-local resources, $B_n$-box and $B_n^d$-box, generalizations of the PR-box based on the number of inputs and the dimension of inputs, respectively. We show that the no-signaling condition imposes equivalence between the $B_n$-box and the $(n \rightarrow 1)$ RAC. We also bring up a signaling instant of a perfectly working $(n\rightarrow 1)$ RAC which cannot simulate the $B_n$-box, thus showing that its weaker than its no-signaling counterpart. While in the case of higher dimension even the no-signaling condition is not enough to enforce an equivalence between the $B_n^d$-box and $(n\rightarrow 1,d)$ RAC; i.e., while the $B_n^d$-box can win a $(n\rightarrow 1,d)$ RAC with certainty, not all no-signaling instances of a $(n\rightarrow 1,d)$ RAC can simulate the $B_n^d$-box. We capture these relations in elegant resource inequalities. Finally, as an application we show that $(n-1)$ PR-boxes supplemented with one bit communication are necessary and sufficient to win a $(n\rightarrow 1)$ RAC with certainty. 
+\end{abstract}
+
+\pacs{Valid PACS appear here}% PACS, the Physics and Astronomy
+                             % Classification Scheme.
+%\keywords{Suggested keywords}%Use showkeys class option if keyword
+                              %display desired
+\maketitle
+
+%\tableofcontents
+\section{Introduction}
+\noindent Popescu and Rohrlich \cite{popescu1994quantum} revealed that the no-signaling condition, on its own, allows for more non-locality than what is maximally admitted by the quantum theory. They introduced a bipartite no-signaling resource which violates Clauser-Horne-Shimory-Holt (CHSH) inequality to its algebraic maximum, now commonly referred to as the PR-box (PR). This discovery led to the foundational quest for new information theoretic principles that would imply a restriction on the amount of non-locality to the quantum maximum. A rather straightforward way to approach this question was to look for tasks which perform significantly better using non-local resources restricted by the no-signaling condition as compared to the quantum resources. One such breakthrough was achieved in the form of information causality \cite{pawlowski2009information}, an information theoretic principle primarily based on Random Access Codes (RACs). The most basic RAC is a bipartite task wherein Alice is provided two bits and is allowed to communicate only one bit to Bob. We shall use the notation $(2\rightarrow1)$ specifying the encoding of $2$ input bits \textit{into} $1$ bit message. Bob is not allowed to communicate with Alice and is required to guess one of Alice's bits depending on a random question. The measure of success in this task is the probability with which Bob guesses correctly. Sharing the PR, Alice and Bob could win with certainty the $(2 \rightarrow 1)$ RAC. Using either classical or quantum resources it is not possible to win the $(2 \rightarrow 1)$ RAC with certainty. However the maximum winning probability of the $(2 \rightarrow 1)$ RAC using quantum resources ($\frac{2+\sqrt{2}}{4}$) is higher than the classical maximum ($\frac{3}{4}$). RAC forms a broad category of communication tasks which have found use in a variety of applications. For instance RAC serves as the basic primitive for cryptography in classical information theory \citep{kilian1988founding,crepeau1988achieving}. Whereas in the quantum scenario RAC forms the basis of Wiesner's first quantum protocols \cite{wiesner1983conjugate,ambainis2002dense}, semi-device independent cryptography \cite{pawlowski2011semi,chaturvedi2015security} and randomness expansion \cite{li2011semi,li2012semi}. \\
+The notion of inter-convertibility between resources is fundamental to any theory of resources, for instance the entanglement theory  \cite{bennett1996concentrating,horodecki2002laws,brandao2008entanglement}, the quantum communication theory \cite{abeyesinghe2009mother}, thermodynamics \cite{janzing2000thermodynamic,horodecki2013fundamental,brandao2013resource} or in general the no-signaling framework \cite{allcock2009closed,brunner2011bound}. As mentioned above, Alice and Bob can win the $(2\rightarrow1)$ RAC perfectly, sharing the PR along-with an additional bit of communication.  
+The other way round was raised as a question in \cite{grudka2014popescu}; that is, whether a perfectly functioning $(2\rightarrow1)$ RAC can be used to simulate the PR? To approach this question the authors used a novel technique of instantiating the task as a static resource. They introduced the notion of a  RAC-box (RB), an arbitrary box which when supplemented with one bit of communication can win the corresponding RAC with certainty. It was shown that under the no-signaling condition the $(2\rightarrow1)$ RB can simulate the PR. 
+In this way the authors established equivalence between a static no-signaling resource (PR) and a no-signaling instance of a dynamic functionality ($(2\rightarrow1)$ RAC). Furthermore they showed that a signaling $(2\rightarrow1)$ RB cannot simulate the PR. Thus a signaling resource was shown to be weaker as compared to a no-signaling resource which is contradictory to intuition. \\ 
+In this work, our primary motivation is to further the relationship between dynamic tasks RAC and static non-local resources. In general, information theoretic tasks (for instance, the $(2 \rightarrow 1)$ RAC) require a protocol which utilizes a specific resource (like, the PR). The equivalences between a task and a resource fixes the protocol along-with proving its optimality. These equivalences provide insights into the type of resources required for a task and relate the success probability of the task with the purity of the resource under consideration. Also generally extremal boxes of the no-signaling polytope like the PR, are described uniquely as probability distributions satisfying certain expressions over inputs and outputs of the parties involved. These expressions are commonly referred to as general probabilistic games. For instance, the PR correlations are uniquely described by the expression $x.y=X\oplus Y$ where $x(y)\in \{0,1\}$ is Alice's (Bob's) input and $X(Y) \in \{0,1\}$ is Alice's (Bob's) output \footnote{Such expressions form Bell inequalities, when the maximum quantum probability of satisfying them is greater than the classical maximum.}.
+The strict equivalences then relate the winning probability of task to the probability with which the expressions under consideration are satisfied (winning probability of the general probabilistic game). 
+Relationships, apart from strict equivalences, thus found are represented in an elegant way using resource inequalities. Below we provide a sketch of this work.\\ 
+First we consider the case of bits. We introduce the $B_n$-box, a generalization of the PR with respect to number of bits supplied to Alice. We show that the $B_n$-box is equivalent to the no-signaling $(n\rightarrow 1)$ RB. Here the notation $(n\rightarrow 1)$ implies that Alice encodes $n$ bits into a single bit message. We further find a signaling (Alice to Bob) $(n\rightarrow 1)$ RB which cannot simulate the $B_n$-box. To quantify the same we provide a resource inequality and show that it is saturated. 
+As an application we show that the minimum number of no-signaling $(2\rightarrow 1)$ RBs or PRs required to win a general $(n\rightarrow 1)$ RAC with certainty when only one bit of communication is allowed is $n-1$. This fact is brought up by showing that $n-2$  $(2\rightarrow 1)$ RBs or PRs and one bit of classical communication cannot win a $(n\rightarrow 1)$ RAC. To complete the proof we provide a protocol for winning a $(n\rightarrow 1)$ RAC using $n-1$ $(2\rightarrow 1)$ RBs or PRs  and a single bit of classical communication. \\
+Next we take up the more general case of $d$its. The case of higher dimensions is more intricate and subtle. We introduce a extremal non-local box, the $B^d_n$-box and show that it wins a $(n\rightarrow 1,d)$ RAC with certainty. Here the notation $(n\rightarrow 1,d)$ specifies the encoding of $n$ $d$its into a single $d$it message where $d>2$.  However here no-signaling condition is not enough to enforce equivalence. We show using explicit examples that there exists a no-signaling instance of a perfectly working $(n\rightarrow 1,d)$ RAC which  cannot simulate the $B^d_n$-box. Yet again to quantify the same we provide a resource inequality and show that it is saturated. \\
+This seemingly abstract mathematical work and consequent results have apparently extensive applications and implications in the fields of foundations, resource theory and cryptography which are discussed in the final section.
+
+
+
+\section{\label{sec:level1}The case of bits}
+In this section we investigate the relationships between generalizations to the $(2\rightarrow 1)$ RAC and the PR. based on the number of input bits provided to Alice. We start by defining the resources under consideration and subsequently study their relationships.
+\subsection*{$(n\rightarrow1)$ RAC, $(n\rightarrow1)$ RB and $B_n$-box}
+\noindent Let us define a {$(n\rightarrow1)$ RAC}. This is a {task} wherein, Alice is assigned $n$ input bits, $a_0,a_1,..a_{n-1}$. Bob is assigned an input $n$it, $b\in\{0,1,2,..n-1\}$ to specify which of Alice's bit he is required to guess. Bob has a bit of output $B$. For a perfectly working $(n\rightarrow1)$ RAC, $B=a_b$ for all possible inputs [see FIG. \ref{fig1}]. \\
+Consider a box that has an additional output on Alice's side, $A$ and one more input, $A'$ on Bob's side [see FIG. \ref{fig1}]. Further suppose that it is no-signaling from Bob to Alice \footnote{We deliberately leave out the case of signaling from Bob to Alice, as it would trivialize the RAC task. Bob could then simply inform Alice of the index of Alice's input she is required to guess. Following which Alice would send that particular input as the message.}. Such a box we shall refer to as the $(n\rightarrow1)$ RB when the following condition holds: if $A=A'$, then it acts like a perfectly working $(n\rightarrow1)$ RAC i.e., $B=a_b$. However, when $A\neq A'$ we do not put any restrictions.  This box is described by the probability distribution $p(A,B|a_0,a_1,..a_{n-1},A',b)$ with the condition, for all $i\in\{0,1,2,..n-1\}$,
+\begin{equation}\label{e1}
+p(B=a_i|A'=A,b=i)=1
+\end{equation}
+\begin{figure}
+\includegraphics[scale=0.5]{Def1.pdf}
+\caption{  \label{fig1} a) $(n\rightarrow 1)$ RAC. b) $B_n$-box c) $(n\rightarrow 1)$ RB provides a fully functioning $(n\rightarrow 1)$ RAC, provided that $A'=A$. In particular when $A$ is sent as a message to Bob and he assigns $A'=A$, then $B=a_b$. d) no-signaling $(n\rightarrow 1)$ RB satisfies $B=a_b\oplus A \oplus A'$.}
+\end{figure}
+
+\noindent Notice that we have the freedom to define the probability distribution of the $(n\rightarrow 1)$ RB as long as it can be used as a perfectly functioning $(n\rightarrow 1)$ RAC with one bit of communication. This implies we can have both signaling (only possible from Alice to Bob) and no-signaling  $(n\rightarrow 1)$ RB. \\ A \textit{no-signaling $(n\rightarrow1)$ RB} is an instance of the $(n\rightarrow1)$ RB with an additional condition, namely when no message is sent, Bob is not able gain any information about Alice's inputs (no-signaling condition) i.e. $p(B|a_0,a_1,..a_{n-1},A',b)=p(B|a_0',a_1',..a_{n-1}',A',b)$ for all possible values of $B,A',b$. Now we characterize the no-signaling $(n\rightarrow 1)$ RB by the following lemma.
+\begin{mydef2} \label{lem1}
+no-signaling $(n\rightarrow 1)$ RB for $A\neq A'$ acts as an anti-$(n\rightarrow 1)$ RAC, i.e., it satisfies
+\begin{equation} \label{el1}
+B=a_b\oplus A \oplus A'
+\end{equation}
+\end{mydef2}
+Let Alice and Bob share the no-signaling $(n\rightarrow 1)$ RB. Suppose Alice \textit{does not} send the message and Bob chooses $A'$ randomly, 
+\begin{equation}\label{e2}
+p(A=A')=p(A\neq A')=\frac{1}{2}
+\end{equation}
+Let $p(B=a_i|b=i)$ denote the probability that Bob's outcome is correct when no message was sent. The \textit{no-signaling} condition along with the fact that Alice's inputs are uniformly distributed implies $p(B=a_i|b=i)=\frac{1}{2}$ [see FIG. 1]. Upon conditioning on the events $A=A'$ and $A\neq A'$ we obtain, 
+\begin{eqnarray}
+p(B=a_i|A=A',b=i)p(A=A)+\nonumber \\ p(B=a_i|A\neq A',b=i)p(A\neq A')=\frac{1}{2}
+\end{eqnarray}
+From (\ref{e1}) and (\ref{e2}) we obtain, 
+\begin{equation}
+\frac{1}{2}+p(B=a_i|A\neq A',b=i)\frac{1}{2}=\frac{1}{2}
+\end{equation}
+which implies, 
+\begin{equation}
+p(B=a_i|A\neq A',b=i)=0
+\end{equation}
+i.e., if $A\neq A'$, $B=a_i\oplus 1$ or, 
+\begin{equation} \label{e7}
+p(B=a_i\oplus 1|A\neq A',b=i)=1
+\end{equation}
+Thus equations (\ref{e1}) and (\ref{e7}) lead to the desired result  (\ref{el1}). $\blacksquare$ \\
+We shall now present a signaling instance of the $(n\rightarrow1)$ RAC, the \textit{signaling $(n\rightarrow1)$ RB}, which performs its duty regarding $(n\rightarrow 1)$ RAC when supplemented with a bit of communication but is signaling from Alice to Bob. It is an instance of the $(n\rightarrow1)$ RB with an additional condition,
+\begin{equation}\label{sigme}
+p(B=a_i|A\neq A',b=i)=\frac{1}{2}
+\end{equation}
+In this case when no message is sent Bob could still gain some information about Alice's inputs as,
+\begin{equation}
+p(B=a_i|b=i)=\frac{3}{4}
+\end{equation}
+It is to be noted at this point that in general any instance of $(n\rightarrow1)$ RB with $p(B=a_i|A\neq A',b=i)=p$ where $0<p\leq 1$ can be regarded as signaling, as it would imply  $p(B=a_i|b=i)> \frac{1}{2}$.  \\
+Finally, we define our contender from non-local resources as a generalization to the PR. A  $B_n$-box is a bipartite \textit{no-signaling} \textit{resource} (correlation) wherein, Alice's side has $n-1$ input bits, $x_{1},x_{2},x_{3}...x_{n-1}$ and an output bit, $X$. Bob's side has an input $n$it, $y\in\{0,1,2,3...n-1\}$ and an output bit, $Y$. A $B_n$-box is described by the probability distribution $p(X,Y|x_1,x_2,..x_{n-1},y)$ such that,
+\begin{equation}
+p(X,Y|x_1,x_2,..x_{n-1},y)=
+\begin{cases}
+\frac{1}{2} & for X\oplus Y=x_y,\\
+0 & else.
+\end{cases}
+\end{equation}
+The condition,
+\begin{equation} \label{Bncorr}
+X\oplus Y=x_y
+\end{equation}
+will be called the $B_n$ correlations, where $x_0=0$. 
+\subsection*{Relationships}
+\noindent We shall proof the following Theorem which deals with equivalence between a $B_n$-box and a no-signaling $(n\rightarrow 1)$ RB.
+\begin{mydef1} \label{thm1}
+The $B_n$-box and the no-signaling $(n\rightarrow 1)$ RB are strictly equivalent.
+\end{mydef1}
+In order to prove equivalences between two resources it is necessary and sufficient to show that each can simulate the other. Here we provide a protocol using which Alice and Bob sharing a $B_n$-box and one bit of communication can win the $(n\rightarrow1)$ RAC. 
+\begin{enumerate}
+\item Alice receives $n$ input bits $a_0,a_1,..a_{n-1}$. She assigns $x_i=a_0\oplus a_i$ for $i\in\{1,2,..n-1\}$.
+\item Alice obtains an output bit $X$ from $B_n$-box sends the message $m=a_0\oplus X$.
+\item  Bob receives $y=b$ and obtains output bit  $Y$. 
+\item Bob outputs the final answer $B=m\oplus Y=a_0\oplus X \oplus Y$.  
+\end{enumerate}
+\noindent Now for a $B_n$ correlations, $X\oplus Y=x_y$. Therefore $B=a_0\oplus x_y=a_i$ if $y\in\{1,2,..n-1\}$ and $B=a_0$ if y=0.
+
+
+\noindent Now to complete the proof, we provide a protocol using which Alice and Bob sharing the  no-signaling  $(n\rightarrow1)$ RB can simulate the statistics of the $B_n$ box.
+\begin{enumerate}
+\item Alice receives $n-1$ input bits $x_1,x_2,..x_{n-1}$ and she inputs $a_i=x_i$ for $i\in\{1,2,..n-1\}$ and fixes $a_0=0$.
+\item Alice obtains an output bit $X=A$ from the $(n\rightarrow 1)$ RB.
+\item Bob receives $y\in \{0,1,2,..n-1\}$ and fixes $A'=0$ obtains output bit  $Y=B$.
+\end{enumerate}
+\noindent Observe whenever $X=A=A'=0$, using (\ref{e1}) we get $Y\oplus X=Y=B=a_b=x_i$. Further whenever $X=A\neq 0$, using (\ref{e7}) we obtain $Y\oplus X=Y\oplus 1=B\oplus 1=a_b\oplus 1 \oplus 1=a_b=x_i$. Thus the $B_n$ correlations are reproduced. $\blacksquare$ \\ 
+We shall now provide the following resource inequality which implies that having access to any $(n\rightarrow1)$ RB (signaling or no-signaling), one bit of communication (c-bit) and one shared random bit (sr-bit) we can simulate a $B_n$-box and additionally obtain an erasure channel $\xi$ .
+\begin{mydef3}\label{re1}
+between the $(n\rightarrow1)$ RB and the $B_n$-box : \\
+We show that the following inequality holds for any $(n\rightarrow1)$ RB,
+\begin{eqnarray} 
+(n\rightarrow1)\ RB  +1\ c\mhyphen bit + 1\  sr\mhyphen bit \geq \nonumber \\ B_n\mhyphen box + \xi
+\end{eqnarray}
+where $\xi$ is a bit erasure channel, with probability of erasure $\epsilon=p(y\neq 0)$.
+\end{mydef3}
+ Since by definition $(n\rightarrow1)$ RB plus one bit of communication offers a perfectly functioning $(n\rightarrow1)$ RAC we shall prove the following inequality instead,
+\begin{eqnarray}
+(n\rightarrow1)\ RAC + 1\  sr\mhyphen bit \geq \nonumber \\ B_n\mhyphen box + \xi
+\end{eqnarray}
+In order to reproduce the $B_n$-box in the case when $y=0$, Alice and Bob use just the shared random bits, since Alice's and Bob's outputs are required to be the same, i.e., $X\oplus Y=0$. The $(n\rightarrow1)$ RAC is not used up and can be utilized for communication of the bit $a_0$. But when $y\neq 0$, Bob will need the $(n\rightarrow1)$ RAC to reproduce $B_n$ correlations as $X\oplus Y=x_y$, and in this case no communication will be performed. \\
+Let $z$ denote the bit to be communicated. Alice puts $a_0=z$ and  $a_i=x_i$ where $i\in \{1,2,..n-1\}$, while Bob inputs $b=y$. Alice and Bob use shared random bits for outputs. When $y=0$, Bob simply outputs the shared random bit and $B_n$-box is reproduced. When $y\neq 0$, Bob performs a CNOT gate with his output $B$ being the control bit and his shared random bit being target bit. When $y\neq 0$ we need to have correlations when $x_i=0$ and anti correlations when $x_i=1$ given that Bob inputs $b=y=i$. From the definition of a perfectly functioning $(n\rightarrow 1)$ RAC, when $b=y=i$ where $i\in \{1,2,..n-1\}$, we have $B=x_i$. Hence, when $x_i=0$ the shared random bit is bot flipped and Alice and Bob have correlations and when $x_i=1$ the bit is flipped and they have anti-correlations. Thus the protocol perfectly simulates the $B_n$ correlations.\\
+When $y=0$, Bob's output $B=a_0=z$, hence the message is perfectly transmitted, whereas for $y\neq 0$ Bob's output $B=x_y$ and the message is lost. Thus we obtain a erasure channel with probability of erasure  $\epsilon=p(y\neq 0)=\frac{n-1}{n}$ (assuming Bob's input are uniformly distributed). \\
+\textit{Tightness of resource inequality \ref{re1}:} This resource inequality is trivial for a no-signaling $(n\rightarrow 1)$ RB. However using the signaling $(n\rightarrow 1)$ RB defined above we can tighten the inequality through the following Theorem.
+\begin{mydef1} \label{thm2}
+Assume that $x_1,x_2,..x_n,y$ are generated uniformly at random. Let us suppose for the signaling $(n\rightarrow 1)$ RB described above, a channel $\Lambda$ satisfies the following inequality:
+\begin{eqnarray} \label{REsh}
+(n\rightarrow1)\ RB + 1\  c\mhyphen bit \geq \nonumber \\ B_n\mhyphen box + \Lambda
+\end{eqnarray}
+Then the capacity of the channel, $\Lambda$ is upper bounded by $\frac{1}{n}$ bit.
+\end{mydef1} \label{thm2}
+For the proof see Appendix A.  The Theorem states if the signaling $(n \rightarrow 1)$ RB along-with a classical channel with a single bit capacity (a message bit) are used to reproduce the $B_n$-box, one may obtain an additional channel with at max $\frac{1}{n}$ bit capacity (equivalent to a bit erasure channel with probability of erasure being $\frac{n-1}{n}$). In other words in order to simulate the $B_n$-box using the signaling $(n\rightarrow 1)$ RB, we need, in addition at-least $\frac{n-1}{n}$ bit of communication. Thus, in this respect the signaling $(n\rightarrow 1)$ RB is  weaker than the no-signaling $(n\rightarrow 1)$ RB (which is equivalent to the $B_n$-box). While Theorem 2 holds true for all $(n\rightarrow1)$ RB,
+we have used the particular instance defined in equation \ref{sigme} as it saturates the resource inequality provided in Theorem 2.
+\subsection*{$(2\rightarrow 1)$ RACs as building blocks for $(n\rightarrow1)$ RAC}
+\noindent It is a known fact that some number of no-signaling $(2\rightarrow 1)$ RBs and 1 c-bit can be used to construct a general  $(n\rightarrow 1)$ RAC. Through the following Theorem we shall show that the necessary and sufficient number of no-signaling $(2\rightarrow 1)$ RBs required to win a  $(n\rightarrow 1)$ RAC when Alice is allowed to communicate 1 c-bit is $n-1$.
+\begin{mydef1} \label{thm3}
+$n-1$ no-signaling $(2\rightarrow 1)$ RBs  are necessary and sufficient to win the $(n\rightarrow 1)$ RAC when Alice is allowed to communicate 1 c-bit.
+\end{mydef1} 
+We shall prove this Theorem in two parts. First we shall prove the following lemma,
+\begin{mydef2} \label{lem:countRAC}
+$n-2$ no-signaling $(2\rightarrow 1)$ RBs + 1 c-bit cannot win the  $(n\rightarrow 1)$ RAC.
+\end{mydef2}
+For the proof see Appendix B. To complete the proof we provide a protocol which uses $n-1$ no-signaling $(2\rightarrow 1)$ RB and 1 c-bit of additional communication to win the $(n\rightarrow 1)$ RAC. The protocol we provide, utilizes two subroutines namely, concatenation and addition, which are two basic operations one could perform on the no-signaling $(n\rightarrow1)$ RBs, in order to obtain more complicated resources or functionalities. (see Appendix C). For instance the $(7\rightarrow1)$ RAC requires 6 no-signaling $(2\rightarrow 1)$
+RBs and a c-bit of communication [see FIG. \ref{7to1} ]
+\begin{figure} 
+\includegraphics[scale=0.5]{7.pdf}
+\caption{ \label{7to1} (Color online) The figure demonstrates the use of concatenation and addition of no-signaling $(2\rightarrow 1)$
+RBs and 1 c-bit
+to win a $(7\rightarrow 1)$ RAC  . \textit{RESOURCE: $7-1=6$ } no-signaling $(2\rightarrow 1)$
+RBs. In particular, here Bob is trying to learn $a_2$.}
+\end{figure}
+
+
+
+\section{From bits to dits.}
+In this section we study the relationships between further generalizations to the $(n\rightarrow1)$ RAC and the $B_n$-box, this time around based on the dimension $d$ of inputs provided to Alice and message she sends. We start of with defining the resources under consideration and subsequently study their relationships.
+\subsection*{$(n\rightarrow1,d)$ RAC, $(n\rightarrow1,d)$ RB, $B_n^d$-box }
+\noindent We start by defining the $(n\rightarrow1,d)$ RAC. This is a task wherein,  Alice is assigned $n$ input $d$its, $a_0,a_1,..a_{n-1}$ where $a_i\in \{0,1,..d-1\}$ for $i\in \{0,1,..n-1\}$.  Bob is assigned an input nit, $b\in\{0,1,2,..n-1\}$ to specify which of Alice's $d$its he is required to guess. Bob has a $d$it of output $B$. For a perfectly working $(n\rightarrow1,d)$ RAC, when $B=a_b$ for all possible inputs [see FIG. \ref{Def2}]. \\
+Let us consider another box that has an additional output $d$it on Alice's side, $A$ and one more input $d$it, $A'$ on Bob's side [see FIG. \ref{Def2}]. Further suppose that it is no-signaling from Bob to Alice. Such a box we call $(n\rightarrow1,d)$ RB when the following condition holds: if $A=A'$, then it acts like a $(n\rightarrow1,d)$ RAC i.e., $B=a_b$. However when $A\neq A'$ we do not put any restrictions.  This box is described by the probability distribution $p(A,B|a_0,a_1,..a_{n-1},A',b)$ with the condition, i.e., for all $i\in\{0,1,2,..n-1\}$,
+\begin{equation}\label{de1}
+p(B=a_i|A'=A,b=i)=1
+\end{equation}
+This box is designed such that when supplemented with one bit of communication, it offers a perfect $(n\rightarrow1,d)$ RAC. A
+\textit{no-signaling $(n\rightarrow1,d)$ RB} is an instance of $(n\rightarrow1,d)$ RB with an additional condition, namely, when no message is sent Bob should not able gain any information about Alice's inputs (no-signaling condition); i.e., $p(B|a_0,a_1,..a_{n-1},A',b)=p(B|a_0',a_1',..a_{n-1}',A',b)$ for all possible values of $B,A',b$ [see FIG. 3]. \\
+The case of higher dimension $d>2$ presents itself with intricate details. To see this, let Alice and Bob share the no-signaling $(n\rightarrow 1,d)$ RB. Suppose Alice \textit{does not} send the message and Bob chooses $A'$ randomly, 
+\begin{equation}\label{de}
+p(A=A')=\frac{1}{d}
+\end{equation}
+Let $p(B=a_i|b=i)$ denote the probability that Bob's outcome is correct when no message was sent. The \textit{no-signaling} condition along with the fact that Alice's inputs are uniformly distributed implies $p(B=a_i|b=i)=\frac{1}{d}$. Now, 
+\begin{multline}
+p(B=a_i|b=i)=p(B=a_i,A=A'|b=i)+ \\ p(B=a_i,A\neq A'|b=i)=\frac{1}{d}
+\end{multline}
+\begin{multline}
+p(B=a_i|b=i)=p(B=a_i|A=A',b=i)p(A=A)+ \\ p(B=a_i|A\neq A',b=i)p(A\neq A')=\frac{1}{d}
+\end{multline}
+From (\ref{de1},\ref{de}) we obtain, 
+\begin{equation}
+\frac{1}{d}+p(B=a_i|A\neq A',b=i)\frac{d-1}{d}=\frac{1}{d}
+\end{equation}
+which implies, 
+\begin{equation}\label{imp}
+p(B=a_i|A\neq A',b=i)=0
+\end{equation}
+Notice that this \textit{does not} completely specify the value(or probability distribution) of $B$ except for the fact that it must not be $a_i$, as compared to the case of $d=2$. Thus, even under the no-signaling for the case $d>2$ we have the freedom to define the specific probability distribution of the no-signaling $(n\rightarrow 1,d)$ RB as long as it can be turned into a perfect $(n\rightarrow 1,d)$ RAC using a single $d$it of message. This implies we can define subclasses of the no-signaling $(n\rightarrow 1,d)$ RB based on additional condition over the probability distribution. W.l.o.g when no message is sent we assume that Bob always inputs $A'=0$, then we can have the following two no-signaling $(n\rightarrow 1,d)$ RB,
+\begin{itemize}
+\item \textit{no-signaling $(n\rightarrow 1,d)$ RB\textsuperscript{1}} : This particular instance of the no-signaling $(n\rightarrow1,d)$ RB is defined by additional condition over the probability distribution $p(B+_d A=a_i|A,A'=0,b=i)=1$  (where $+_d$  is addition modulo $d$).
+\item \textit{no-signaling $(n\rightarrow 1,d)$ RB\textsuperscript{2}} :This particular instance of no-signaling $(n\rightarrow,d)$ RB is defined by additional condition over probability distribution $p(B=j|A\neq0,A'=0,b=i)=\frac{1}{d}$ for $j\in\{0,1,2,..d-1\}-{a_i}$. This is a bad instance in the sense that while it fulfills its duties as a $(n\rightarrow 1,d)$ RAC when $A'=A$, it cannot simulate the $B_n^d$-box (defined below) which is achieved by no-signaling $(n\rightarrow 1,d)$ RB\textsuperscript{1}. 
+\end{itemize}
+There are plenty of other instances of the no-signaling $(n \rightarrow 1,d)$ RB possible for $d>2$. The case of $d>2$ is also rich in complexity when it comes to defining a generalization to the PR (or the $B_n$-box). Here we shall confine ourselves to defining a particular generalization namely, $B_n^d$-box. The $B_n^d$-box is a bipartite \textit{no signaling} \textit{resource} (correlation) wherein, Alice's side has $n-1$ input $d$its, $x_{1},x_{2},x_{3}...x_{n-1}$ and an output $d$it, $X$. Bob's side has an input $n$it, $y\in\{0,1,2,3...n-1\}$, and receives output $d$it $Y$. 
+The $B_n^d$-box is described by the probability distribution $p(X,Y|x_1,x_2,..x_{n-1},y)$ such that, \\ 
+\begin{equation}
+p(X,Y|x_1,x_2,..x_{n-1},y)=
+\begin{cases}
+\frac{1}{d} & for X+_d Y=x_y,\\
+0 & else.
+\end{cases}
+\end{equation}
+The condition,
+\begin{equation} \label{Bndcorr}
+X+_d Y=x_y
+\end{equation}
+will be called the $B_n^d$ correlations.\\ 
+The instances defined here are only to bring up the main fact of this section, i.e., for $d>2$, the no-signaling condition is no-longer sufficient to deem the  $(n \rightarrow 1,d)$ RAC  equivalent to a particular non-local resource, as was the case for $d=2$. Instead, here equivalences exist between subclasses of $(n \rightarrow 1,d)$ RB and particular classes of non-local resources, as is brought up by example in the following subsection. \\
+\begin{figure}
+\includegraphics[scale=0.5]{Def2.pdf}
+\caption{  \label{Def2} a) $(n\rightarrow 1,d)$ RAC. b) $B_n^d$-box c) $(n\rightarrow 1,d)$ RB acts like an $(n\rightarrow 1)$ RAC, provided that $A'=A$. In particular when $A$ is sent as a message to Bob and he assigns $A'=A$, then $B=a_b$. }
+\end{figure}
+\subsection*{Relationships}
+\noindent We begin with showing through the following Theorem which shows that the $B_n^d$-box is equivalent to the no-signaling $(n\rightarrow 1,d)$ RB\textsuperscript{1}.
+\begin{mydef1} \label{thm4}
+The $B_n^d$-box and a no-signaling $(n\rightarrow1,d)$ RB\textsuperscript{1} are equivalent for  $d>2$.
+\end{mydef1}
+We shall prove the above Theorem by giving explicit protocols.
+We provide the protocol using which Alice and Bob sharing the $B_n^d$-box and 1 c-$d$it of communication can win the $(n\rightarrow1,d)$ RAC with certainty. 
+\begin{enumerate}
+\item Alice receives $n$ input $d$its $a_0,a_1,..a_{n-1}$ and she assigns $x_i=a_i-_d a_0$ for $i\in\{1,2,..n-1\}$.
+\item Alice obtains an output $d$it $X$ from $B_n^d$-box sends the message $m=X+_d a_0$.
+\item Bob receives $y\in\{0,1,2,..n-1\}$ and obtains output $d$it  $Y$. 
+\item Bob outputs the final answer $B=m+_dY=a_0+_d X +_d Y$.
+\end{enumerate}
+\noindent Now for the $B_n^d$-box, $X+_d Y=x_y$. Therefore $B=a_0+_dx_y=a_i$ if $y\in\{1,2,..n-1\}$ and $B=a_0$ if y=0. \\
+Finally to complete the proof we provide the protocol using which Alice and Bob sharing no-signaling $(n\rightarrow1,d)$ RB\textsuperscript{1} can simulate a $B_n^d$-box perfectly.
+\begin{enumerate}
+\item Alice receives $n-1$ input $d$its $x_1,x_2,..x_{n-1}$ and she inputs $a_i=x_i$ for $i\in\{1,2,..n-1\}$ and fixes $a_0=0$.
+\item Alice obtains an output bit $X=A$ from the no-signaling $(n\rightarrow 1,d)$ RB\textsuperscript{1}.
+\item Bob receives $y\in \{0,1,2,..n-1\}$ and fixes $A'=0$ obtains output $d$it  $Y=B$.
+\end{enumerate}
+\noindent  Observe whenever $X=A=A'=0$, $Y+_d X=Y=B=a_b=x_i$. Further whenever $X=A\neq 0$, $Y+_dX=B+_dA=a_b=x_i$. Thus the $B_n^d$ correlations are reproduced. $\blacksquare$ \\
+We shall now provide the following resource inequality which implies that having access to any $(n\rightarrow1,d)$ RB, one $d$it of communication (c-$d$it) and one shared random $d$it (sr-$d$it) we can simulate the $B_n^d$-box and additionally obtain erasure $d$it channel $\xi_d$:
+\begin{mydef3}\label{re2}
+between a $(n\rightarrow1,d)$ RB and a $B_n^d$-box : \\
+We show that the following inequality holds for any $(n\rightarrow1,d)$ RB,
+\begin{eqnarray} 
+(n\rightarrow1,d)\ RB  +1\ c\mhyphen dit + 1\  sr\mhyphen dit \geq \nonumber \\ B_n^d\mhyphen box + \xi_d
+\end{eqnarray}
+where $\xi_d$ is a $d$it erasure channel, with probability of erasure $\epsilon=p(y\neq 0)$. 
+\end{mydef3}
+Since by definition $(n\rightarrow1,d)$ RB plus 1 $d$it of communication offers a perfectly functioning $(n\rightarrow1,d)$ RAC we shall prove the following inequality instead,
+\begin{eqnarray}
+(n\rightarrow1,d)\ RAC + 1\  sr\mhyphen dit \geq \nonumber \\ B_n^d\mhyphen box + \xi_d
+\end{eqnarray}
+In order to reproduce the $B_n^d$ correlations in the case when $y=0$, Alice and Bob use the shared random $d$its of the form $s_A +_d s_B =0$. The $(n\rightarrow1,d)$ RAC is not used up and can be utilized for communication of the $d$it $a_0$. But when $y\neq 0$, Bob will need the $(n\rightarrow1,d)$ RAC to reproduce the $B_n^d$ correlations as $X+_d Y=x_y$, and in this case no communication will be performed. \\
+Let $z$ denote the $d$it to be communicated. Alice puts $a_0=z$ and  $a_i=x_i$ where $i\in \{1,2,..n-1\}$, while Bob inputs $b=y$. Alice and Bob use the shared random $d$its for outputs. When $y=0$, Bob simply outputs the random $d$it and the $B_n^d$ correlations are reproduced. When $y\neq 0$, Bob adds $B$ to her shared random bit $s_B$. From the definition of the $(n\rightarrow 1,d)$ RAC, when $b=y=i$ where $i\in \{1,2,..n-1\}$, we have $B=x_i$. Hence, when $x_i=0$ the shared random bit remains the same so that $X+_d Y=s_A+_d s_B=0$ and when $x_i\neq 0$ Bob produces $Y=s_B+_d B=s_B+_d x_i$ so that $X+_d Y=s_A+_ds_B+_d x_i=x_i$ and in this case the message is lost. Thus we obtain a $d$it erasure channel with probability of erasure  $\epsilon=p(y\neq 0)=\frac{n-1}{n}$ (assuming Bob's input are uniformly distributed). \\
+Now we proceed to show that the no-signaling $(n\rightarrow1,d)$ RB\textsuperscript{2} cannot simulate the $B^d_n$-box. We shall first use the case of $n=2,d=3$ for simplicity.\\
+\textit{Tightness of resource inequality \ref{re2}:} This resource inequality is trivial for the no-signaling $(2\rightarrow 1,3)$ RB\textsuperscript{1} when trying to simulate the $B^3_2$-box. However using the no-signaling $(2\rightarrow 1,3)$ RB\textsuperscript{2} defined above we can tighten the inequality through the following Theorem.
+\begin{mydef1} \label{thm6}
+Assume that $x,y$ (inputs to the $ B_2^3$-box)  are generated uniformly at random. Let us suppose for the no-signaling $(2\rightarrow 1,3)$ RB\textsuperscript{2} described above, a channel $\lambda_3$ satisfies the following inequality:
+\begin{eqnarray}
+(2\rightarrow1,3)\ RB + 1\  c\mhyphen 3it \geq \nonumber \\ B_2^3\mhyphen box + \Lambda_3
+\end{eqnarray}
+Then the mutual information of the channel $\Lambda_3$,  is upper bounded by $\frac{1}{2}$ $3$it.
+\end{mydef1}
+For the proof see Appendix D. The Theorem states that using the $(2\rightarrow 1,3)$ RB\textsuperscript{2} along with a classical channel with a single $3$it capacity (a $3$it of communication) the $B_2^3$ correlations may be reproduced along with a classical channel with maximum capacity of $\frac{1}{2}$ $3$it (equivalent to an erasure $3$it channel with probability of erasure being $\frac{1}{2}$). In other words, in order to simulate the $B_2^3$-box using the no-signaling $(2\rightarrow 1,3)$ RB\textsuperscript{2}, we need, in addition at-least $\frac{1}{2}$ $3$it of communication. Thus, in this respect the no-signaling $(2\rightarrow 1,3)$ RB\textsuperscript{2} is weaker than the no-signaling $(2\rightarrow 1,3)$ RB\textsuperscript{1} (which is equivalent to $B^3_2$-box). It is straightforward to generalize above Theorem for arbitrary $n,d$. 
+\begin{mydef1} \label{thm7}
+Assume that $x_1,x_2,..x_n,y$  are generated uniformly at random. Let us suppose for the no-signaling $(n\rightarrow 1,d)$ RB\textsuperscript{2} described above, a channel $\lambda_d$ satisfies the following inequality:
+\begin{eqnarray}
+(n\rightarrow1,d)\ RB + 1  c \mhyphen dit \geq \nonumber \\ B_d^n\mhyphen box + \Lambda_d
+\end{eqnarray}
+Then the mutual information of the channel, $\Lambda_d$ is upper bounded by $\frac{1}{n}$.
+\end{mydef1}
+The proof of the above Theorem follows directly from the proof of Theorem 2 and \ref{thm6}. Again the Theorem states that using the $(n\rightarrow 1,d)$ RB\textsuperscript{2} along with a classical channel with a single $d$it capacity (a $d$it of communication) the $B_n^d$ correlations may be reproduced along with a classical channel with maximum capacity of $\frac{1}{n}$ $d$it (equivalent to a $d$it erasure channel with probability of erasure being $\frac{n-1}{n}$). While this Theorem holds true for all no-signaling $(n\rightarrow1,d)$ RB, the $(n\rightarrow1,d)$ RB\textsuperscript{2} saturates the above inequality.
+\section{Conclusions, Applications and Future Directions}
+In this work we introduced generalizations of a static no-signaling non-local resource, the PR. First, based on the number of inputs provided to Alice, the $B_n$-box. We show that the $B_n$-box, along with a bit of communication can win with a certainty the task, $(n\rightarrow 1)$ RAC. Furthermore a no-signaling instance of $(n\rightarrow 1)$ RAC (the no-signaling $(n\rightarrow 1)$  RB) can simulate the $B_n$-box. Hence the no-signaling condition enforces equivalences between the resource and the task (Theorem 1). We bring up a signaling instance of $(n\rightarrow 1)$ RAC (the signaling $(n\rightarrow 1)$  RB) and show that it cannot simulate the $B_n$-correlation. To capture these results and to quantify precisely how much weaker is the signaling $(n\rightarrow 1)$  RB as compared to its no-signaling counter-part in the task of simulating the $B_n$ correlations, we provide a resource inequality (Theorem 2).
+Second, based on the dimension of the inputs provided to Alice, namely, the $B_n^d$-box. In the latter case of dimension $d>2$ we find that the no-signaling condition is not enough to enforce a strict equivalence between the $B_n^d$-box and the no-signaling instances of the $(n\rightarrow1,d)$ RAC. We introduce a couple of classes of no-signaling $(n\rightarrow1,d)$ RB, namely, no-signaling $(n\rightarrow1,d)$ $(1)$ and no-signaling $(n\rightarrow1,d)$ $(2)$. While the $B_n^d$-box is strictly equivalent to the no-signaling $(n\rightarrow1,d)$ RB $(1)$ (Theorem 4). The $(n\rightarrow1,d)$ RB $(2)$ cannot simulate the $B_n^d$-box. Again to capture these results and to quantify how much weaker is the $(n\rightarrow1,d)$ RB $(2)$ as compared to $(n\rightarrow1,d)$ RB $(1)$ when it comes to simulating the $B^n_d$-correlations, we provide a resource inequality (Theorem 5 and 6). The new classes of non-local boxes, $B_n$-box and $B_n^d$-box presented in this work, described by expressions in equations (\ref{Bncorr}) and (\ref{Bndcorr}) respectively, correspond to families of non-local games governed by the same expressions. The equivalences then equate the winning probability of the RAC with that of the corresponding non-local games. Thus the equivalences imply direct extension of classical and quantum bounds over the success probability of the non-local game to corresponding bounds over the winning probability of the RAC.\\
+As an application to the equivalence brought up in Theorem 1, we show that the necessary and sufficient number of PRs (equivalently no-signaling ($2 \rightarrow 1$) RBs) required to win a ($n \rightarrow 1$) RAC with certainty is $n-1$ when only one bit of communication is allowed from Alice to Bob (Theorem 1). We bring up this fact in two steps. First, we show using a novel graph theoretic approach that $n-2$ PRs (equivalently no-signaling ($2 \rightarrow 1$) RBs) plus one bit of classical cannot win the $(n\rightarrow 1)$ RAC with certainty (Lemma 2). Second, we provide a protocol for winning the $(n\rightarrow 1)$ RAC with certainty using (n-1) PRs (equivalently no-signaling ($2 \rightarrow 1$) RBs)(equivalently no-signaling ($2 \rightarrow 1$) RBs) and a single bit of message. This protocol provided here is novel, as it uses to two subroutines, namely, addition and concatenation, which form two basic operations that could be performed on no-signaling $(n\rightarrow 1)$ RBs to form larger resources and functionalities (Appendix C). This result along with the protocol allows one to get classical and quantum bounds over the winning probability of $(n\rightarrow 1)$ RAC in terms of corresponding winning probability of the smallest $(2\rightarrow 1)$ RAC [see Appendix FIG. \ref{boundMeToTheGround}]. Furthermore, this result has an important application to the field of device independent cryptography. It has been found by Wim van Dam \cite{WvD05} that using $2^n-1$ PR boxes and single bit of communication one can achieve $(2^n \rightarrow 1)$ RAC. It has been further noted \cite{Colbeck} that
+in case of device independent key such a protocol can be used as a hacking attack. Let Alice and Bob (the honest parties) share together $n-1$ PR boxes with Eve (an eavesdropper), where $n$ is the key length. Then upon certain wiring on their side, and leakage of single bit to Eve (e.g. by a Trojan-horse program), via the van Dam protocol Eve is in a favorable position that she can choose to learn the particular bit of key shared by Alice and Bob. Knowing this attack, we ask if there exist a smaller box than $n-1$ PR boxes, which does the same task, which would make such a protocol significantly more difficult to detect. We give negative answer this question:
+{\it any} box which achieves the attack, is equivalent to $n-1$ PR boxes, which amounts to certain non-negligible "`memory"' inside of the Alice's and Bob's devices,
+making the attack harder to perform.  \\
+The attack invoked above can be however performed only in a world where extremal no-signaling boxes like the PR can be prepared. One reason for such a world to not exist is the aforementioned information causality principle \cite{pawlowski-2009-461}.
+\begin{comment}
+It disallows not only such boxes like the PR to exist, but also disallows for the access in a manner of the RAC:
+\begin{equation}
+\sum_i I(a_i: E |e = i) \leq 1
+\end{equation}
+where  $a_i$ are the bits that Alice and Bob has (the key bits), and $I$ denotes conditional mutual information (conditioned upon choice of the bit $e=i$ by Eve).
+The RHS is the number of leaked bits, so that essentially the effect of RAC is suppressed: only the amount of leakage is known to Eve. 
+\end{comment}
+One may therefore
+consider the secrecy extraction not only under quantum or no-signaling eavesdropping, but also under other principles such as the information causality, which
+we leave for future work.\\      
+In the case of higher dimension, $d>2$, we have shown that there exists, no-signaling $(n\rightarrow1,d)$ RB which cannot simulate all of the extremal non-local resources which can be used to win a $(n\rightarrow1,d)$ RAC. However the question remains open that whether there exists any extremal non-local resource which cannot win a $(n\rightarrow1,d)$ RAC. 
+The equivalences presented in this work can be generalized to multiparty scenario. In a separate work, \cite{A70747}, we study equivalence between $n$-party Svetlichny boxes and a generalization of the standard two party RAC, Controlled Random Access Codes (C-RAC). The same line of exploration can be extended to other cryptographic primitives like the OTP (Oblivious Transfer Protocol).
+Finally, the resource inequalities used here utilize classical communication channels as currency for balancing. These resource inequalities may form a general framework of relating cryptographic primitives with other tasks and resources. 
+ 
+\section{Acknowledgments}
+We acknowledge useful discussions with Micha{\l} Horodecki.
+This project was supported by grant, Harmonia 4 (Grant number: UMO-2013/08/M/ST2/00626), ERC AdG QOLAPS. AC would like to acknowledge CCNSB/CSTAR of IIIT-Hyderabad and  support by Prof. Indranil Chakrabarty. KH acknowledges grant Sonata Bis 5 (Grant number: 2015/18/E/ST2/00327).
+\bibliography{sample.bib}
+\clearpage
+\input{AppendToMe.tex}
+\end{document} 
